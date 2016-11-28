@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/base.css"/>
+		
+	</head>
+	<style>
+	
+		.star {
+			width: 100%;
+			height: 100%;
+			background: url(image/10.jpg)no-repeat center center;
+			background-size: cover;
+			position: absolute;
+			left: 0;
+			top: 0;
+			/*display:none;*/
+		}
+		.star0 {
+			width: 200px;
+			height: 600px;
+			background: url(image/12.jpg)no-repeat;
+			background-size: cover;
+			border-radius: 15px;
+			position: absolute;
+			left: 90px;
+			top: 50px;
+			z-index: 9999;
+		}
+		.star1,
+		.star2,
+		.star3,
+		.star4,
+		.star5 {
+			width: 130px;
+			height: 40px;
+			margin: 0 auto;
+			margin-top: 50px;
+			background: rgba(0, 0, 0, 1);
+			border-radius: 15px;
+		}
+		.star1 a,
+		.star2 a,
+		.star3 a,
+		.star4 a,
+		.star5 a {
+			display: block;
+			width: 130px;
+			height: 40px;
+			text-align: center;
+			line-height: 40px;
+			color: #fff;
+			font-size: 20px;
+		}
+		.wuzi {
+			width: 308px;
+			height: 513px;
+			background: url(image/16.jpg)no-repeat;
+			background-size: cover;
+			position: absolute;
+			left: 290px;
+			top: 50px;
+			transform: translateX(670px);
+			animation: active 1s ease-in 0s 1 forwards;
+			display: none;
+		}
+		.jies {
+			width: 400px;
+			height: 600px;
+			background: url(image/18.jpg)no-repeat;
+			background-size: cover;
+			position: absolute;
+			left: 290px;
+			top: 20px;
+			transform: translateX(670px);
+			animation: active 1s ease-in 0s 1 forwards;
+			display: none;
+		}
+		.shezhi {
+			width: 400px;
+			height: 600px;
+			background: url(bj.jpg)no-repeat;
+			background-size: cover;
+			position: absolute;
+			left: 290px;
+			top: 20px;
+			transform: translateX(670px);
+			animation: active 1s ease-in 0s 1 forwards;
+			display: none;
+		}
+		.que {
+			width: 100px;
+			height: 40px;
+			background: #fff;
+			border-radius: 20px;
+			margin: 0 auto;
+			margin-top: 50px;
+			text-align: center;
+			line-height: 40px;
+		}
+		.mo {
+			width: 100px;
+			height: 40px;
+			background: #fff;
+			border-radius: 20px;
+			margin: 0 auto;
+			margin-top: 20px;
+			text-align: center;
+			line-height: 40px;
+		}
+		form {
+			margin-top: 20px;
+		}
+		label {
+			width: 80px;
+			height: 40px;
+			background: #fff;
+			border-radius: 5px;
+			margin: 0 auto;
+			margin-top: 20px;
+			text-align: center;
+			line-height: 40px;
+			padding: 0 10px;
+			margin-left: 50px;
+		}
+		@keyframes active {
+			0% {
+				transform: translateX(670px);
+				opacity: 0;
+			}
+			50% {
+				transform: translateX(300px);
+				opacity: 0.5;
+			}
+			100% {
+				transform: translateX(300px);
+				opacity: 1;
+			}
+		}
+		@keyframes active1 {
+			0% {
+				transform: scale(1);
+				opacity: 1;
+			}
+			100% {
+				transform: scale(0);
+				opacity: 1;
+			}
+		}
+		.star a:hover{
+		   background:#AE6143;
+		   color:yellow;
+		   border-radius: 10px;
+		}
+	</style>
+	<body>
+		<div class="star">
+			<div class="star0">
+
+				<div class="star5">
+					<a href="##">五子棋</a>
+				</div>
+				<div class="star1">
+					<a href="##">游戏介绍</a>
+				</div>
+				<div class="star2">
+					<a href="##">游戏设置</a>
+				</div>
+				<div class="star3">
+					<a href="index.html">开始游戏</a>
+				</div>
+				
+			</div>
+			<div class="jies"></div>
+			<div class="wuzi"></div>
+			<div class="shezhi">
+				
+					<div class="mo">请选择模式</div>
+					<form action="" class="shi">
+						<label><a href="#">简单</a>
+							<input type="radio" value="jian" name="shi" checked/>
+						</label>
+						<label>一般
+							<input type="radio" value="ban" name="shi" />
+						</label>
+						<label>困难
+							<input type="radio" value="nan" name="shi" />
+						</label>
+
+					</form>
+					<form action="" class="shi1">
+						<label>玩家对战
+							<input type="radio" value="wan" name="shi1" checked/>
+						</label>
+						<label>人机对战
+							<input type="radio" value="ren" name="shi1" />
+						</label>
+					</form>
+					<div class="que">
+						<a href="##">确定</a>
+					</div>
+				</div>
+
+			
+		</div>
+	</body>
+</html>
+<script src="js/jquery.js">
+			
+		</script>
+<script>
+	$(function() {
+		//		.............开始游戏
+//		$(".star3").click(function() {
+//				var index = $(this).index(".star3");
+//				$(".star").css("dispaly", "block").eq(index).css("display", "none");
+//			})
+//.......................退出游戏
+// $(".tuchu").click(function() {
+//				var index = $(this).index(".tuchu");
+//				$(".two").css("dispaly", "block").eq(index).css("display", "none");
+//			})
+			// $(".star4").click(function  () {    
+			//    var index=$(this).index(".star4");
+			// $("body").css("dispaly","none")
+			//   
+			//    
+			//  })
+//...........................................			游戏介绍
+		$(".star1").click(function() {
+			var index = $(this).index(".star1");
+			$(".jies").css("dispaly", "none").eq(index).css("display", "block");
+		})
+		$(".star1").click(function(event) {
+			return false;
+		});
+		$(".star").click(".star1", function() {
+			$(".jies").css("display", "none");
+		})
+//...........................................			五子棋	
+		$(".star5").click(function() {
+			var index = $(this).index(".star5");
+			$(".wuzi").css("dispaly", "none").eq(index).css("display", "block");
+		})
+		$(".star5").click(function(event) {
+			return false;
+		});
+		$(".star").click(".star5", function() {
+			$(".wuzi").css("display", "none");
+		})
+//...........................................			游戏设置	
+		$(".star2").click(function() {
+			var index = $(this).index(".star2");
+			$(".shezhi").css("dispaly", "none").eq(index).css("display", "block");
+		})
+		$(".star2").click(function(event) {
+			return false;
+		});
+//		$(".shezhi").click(function(event) {
+//			return false;
+//		});
+		$(".star0").click(".star2", function() {
+			$(".shezhi").css("display", "none");
+		})
+//...............................确定
+    $(".que").click(function() {
+			var index = $(this).index(".que");
+			$(".shezhi").css("dispaly", "block").eq(index).css("display", "none");
+		})
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+})
+	
+</script>
