@@ -1,0 +1,6 @@
+#canvas{
+  border:1px solid #ccc;
+  margin:100px 400px;
+  background:url(../image/2.jpg)no-repeat;
+  background-size: cover;
+}

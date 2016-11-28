@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>五子棋</title>
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="styl mesheet" type="text/css" href="css/index.css" />
+
+		<script src="js/jquery.js"></script>
+
+	</head>
+	<style>
+		body {
+			background: url(image/8.jpg)no-repeat;
+			background-size: cover;
+		}
+		.two {
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+		}
+		#canvas {
+			margin: 10px 400px;
+			/*border: 1px solid #CCCCCC;*/
+			
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			margin: auto;
+			background: url(image/3.jpg)no-repeat;
+			background-size: cover;
+		}
+		#canvas1 {
+			position: absolute;
+			left: 100px;
+			top: 50px;
+			background: #000;
+			border-radius: 50%;
+		}
+		#canvas2 {
+			position: absolute;
+			right: 100px;
+			top: 50px;
+			background: #fff;
+			border-radius: 50%;
+			background: #FFFFFF;
+			background-size: cover;
+		}
+		.new {
+			width: 120px;
+			height: 40px;
+			position: fixed;
+			top: 580px;
+			left: 1200px;
+			bottom: 20px;
+			right: 0;
+			background: rgba(0, 0, 0, 1);
+			border-radius: 15px;
+			text-align: center;
+			line-height: 40px;
+		}
+		.new a {
+			display: block;
+			width: 120px;
+			height: 40px;
+			color: #fff;
+			font-size: 20px;
+		}
+		.tuchu {
+			width: 120px;
+			height: 40px;
+			position: fixed;
+			top: 580px;
+			right: 1200px;
+			bottom: 20px;
+			left: 50px;
+			background: rgba(0, 0, 0, 1);
+			border-radius: 15px;
+			text-align: center;
+			line-height: 40px;
+		}
+		.tuchu a {
+			display: block;
+			width: 120px;
+			height: 40px;
+			color: #fff;
+			font-size: 20px;
+		}
+		.hei {
+			width: 100px;
+			height: 30px;
+			position: fixed;
+			top: 250px;
+			left: 130px;
+			background: #000;
+			border-radius: 10px;
+		}
+		.hei a {
+			width: 100px;
+			height: 30px;
+			display: block;
+			color: #FFFFFF;
+			text-align: center;
+			line-height: 30px;
+		}
+		.bai {
+			width: 100px;
+			height: 30px;
+			position: fixed;
+			top: 250px;
+			right: 130px;
+			background: #fff;
+			border-radius: 10px;
+		}
+		.bai a {
+			display: block;
+			width: 100px;
+			height: 30px;
+			color: #000;
+			text-align: center;
+			line-height: 30px;
+		}
+		.two a:hover {
+			background: #AE6143;
+			color: yellow;
+			border-radius: 10px;
+		}
+		#qi1 {
+			position: absolute;
+			width: 400px;
+			height: 400px;
+			transform: scale(0, 0);
+			left: 0;
+			right: 0px;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			background: #fff;
+			z-index: 20;			
+			box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.8);
+			transition: all 8s linear;
+			opacity: 0.8;
+		}
+		.ac {
+			transform: scale(1, 1);
+		}
+		#qi1 #close {
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 20px;
+			height: 20px;
+			background: gray;
+			color: #eee;
+			font-size: 18px;
+			text-align: center;
+			line-height: 20px;
+			z-index:999s;
+			border-radius: 50%;
+			cursor: pointer;
+		}
+		#qi1 img {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			z-index: 2;
+		}
+		#qi1 a {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			z-index: 3;
+		}
+		#qi1 a:hover {
+			background: none;
+		}
+		.info {
+			transform: translateY(-450px);
+			transition: active 1s linear 0.1s;
+			width: 200px;
+			height: 200px;
+			background:#000000;
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			margin: auto;			
+		    }
+		.active {
+			transform: translateY(0px);
+		}
+		.cancel,
+		.again {
+			width: 200px;
+			height: 60px;
+			color: white;
+			text-align: center;
+			line-height: 60px;
+		}
+		#text {
+			display: block;
+			width: 200px;
+			height: 60px;
+			text-align: center;
+			line-height: 60px;
+			color: white;
+		}
+		.info a:hover {
+			background: #AE6143;
+			color: yellow;
+			border-radius: 10px;
+		}
+		.quxiao {
+			width: 25px;
+			height: 25px;
+			border-radius: 50%;
+			cursor: pointer;
+			background: white;
+			position: absolute;
+			right: -12px;
+			top: -10px;
+			text-align: center;
+			line-height: 25px;
+			font-size: 20px;
+		}
+		.daohang {
+			width: 200px;
+			height: 100%;
+			float: left;
+			margin-left: 20px;
+			margin-top: 60px;
+		}
+		.daohang li {
+			width: 100%px;
+			height: 40px;
+			margin-top: 40px;
+		}
+		.daohang li span {
+			width: 80px;
+			height: 40px;
+			font-size: 18px;
+			color: #fff;
+			margin-top: 60px;
+			border-radius: 50%;
+			background: #fba40e;
+			text-align: center;
+			cursor: pointer;
+			line-height: 40px;
+			float: left;
+			transition: all 0.8s linear;
+		}
+		.daohang li span a:hover {
+			background: #AE6143;
+			color: yellow;
+			border-radius: 10px;
+		}
+		#check {
+			width: 120px;
+			height: 40px;
+			position: fixed;
+			top: 440px;
+			right: 1200px;
+			bottom: 20px;
+			left: 50px;
+			background: rgba(0, 0, 0, 1);
+			border-radius: 15px;
+			text-align: center;
+			line-height: 40px;
+		}
+		#check a {
+			display: block;
+			width: 120px;
+			height: 40px;
+			color: #fff;
+			font-size: 20px;
+		}
+		#check a:hover {
+			color: yellow;
+		}
+		.box {
+			width: 50%;
+			height: auto;
+			float: right;
+			overflow: hidden;
+			/*display: none;*/
+		}
+		.nav {
+			width: 200px;
+			height: auto;
+			float: right;
+		}
+		.nav li {
+			width: 100%;
+			height: 44px;
+			text-align: center;
+			/*margin-top: 40px;*/
+			/*background: transparent;*/
+			
+			border-radius: 10px;
+			font-family: "华文行楷";
+			font-size: 24px;
+			line-height: 44px;
+			background: rgba(204, 204, 204, 0.6);
+			cursor: pointer;
+			font-weight: 400;
+			transition: transform 0.55s ease-in-out 0.5s, font-size 0.55s ease-in-out 0.5s;
+		}
+		/*.nav li:hover {
+			font-size: 30px;
+			background-image: url(../img/bj.jpg);
+			background-repeat: no-repeat;
+			background-position: center center;
+			color: #fff;
+		}*/
+		
+		ul li.active {
+			animation: move 0.8s ease-in-out 1 both;
+		}
+		@keyframes move {
+			from {
+				transform: translateX(0);
+			}
+			to {
+				transform: translateX(-300%);
+			}
+		}
+		#dj {
+			width: 120px;
+			height: 40px;
+			position: fixed;
+			top: 500px;
+			left: 1200px;
+			bottom: 20px;
+			right: 0;
+			background: rgba(0, 0, 0, 1);
+			border-radius: 15px;
+			text-align: center;
+			line-height: 40px;
+			color: #fff;
+		}
+	</style>
+
+	<body>
+		<div class="two">
+			<canvas width="600" id="canvas" height="600"></canvas>
+			<canvas width="150" id="canvas1" height="150"></canvas>
+			<canvas width="150" id="canvas2" height="150"></canvas>
+			<div id="qi1">
+				<div id="close">X</div>
+			</div>
+
+			<div class="box">
+				<ul class="nav">
+					<li id="dj">人机游戏</li>
+				</ul>
+			</div>
+			<div class="info">
+				<span id="text">黑棋赢</span>
+				<div class="button again">再来一局</div>
+				<div class="button cancel"><a href="index1.html">退出</a></div>
+			</div>
+			<div class="new">
+				<a href="javascript:location.reload();">重新开始</a>
+
+			</div>
+
+			<ul class="daohang">
+				<li><span id="check"><a href="">查看</a></span></li>
+			</ul>
+			<div class="tuchu">
+				<a href="index1.html">退出游戏</a>
+			</div>
+			<div class="hei">
+				<a href="">黑方</a>
+			</div>
+			<div class="bai">
+				<a href="">白方</a>
+			</div>
+		</div>
+
+	</body>
+	<audio id="audio" src="022.wav"></audio>
+	<audio id="audio1" src="棋子音效d.mp3"></audio>
+
+</html>
+<script>
+	$(function() {
+		var canvas = $("#canvas").get(0);
+		var ctx = canvas.getContext("2d");
+		var audio = $("#audio").get(0);
+		var audio1 = $("#audio1").get(0);
+		var canvas1 = $("#canvas1").get(0);
+		var ctx1 = canvas1.getContext("2d");
+		var canvas2 = $("#canvas2").get(0);
+		var ctx2 = canvas2.getContext("2d");
+		var sep = 40;
+		var sR = 4;
+		var r = 18;
+		var qz = {};		
+		var kaiguan = true;
+		var flag = true;
+		var box = $(".box");
+		var caidan = $(".nav li")
+		var title = $(".box title")
+		var count = 0;
+		//游戏的状态
+		var kong = {}
+		var ai = $("#dj")
+		var gameStatu = 'pause';
+		
+		
+		//棋盘
+		function qipan() {
+			ctx.clearRect(0, 0, 600, 600)
+			ctx.save();
+			ctx.beginPath();
+			for (var i = 0; i < 15; i++) {
+				ctx.moveTo(20.5, 20.5 + i * 40);
+				ctx.lineTo(580.5, 20.5 + i * 40);
+				ctx.moveTo(20.5 + i * 40, 20.5);
+				ctx.lineTo(20.5 + i * 40, 580.5);
+			};
+			ctx.stroke();
+			ctx.closePath();
+			ctx.restore();
+		}
+		qipan();
+
+		function l(x) {
+				return (x + 0.5) * sep + 0.5;
+			}
+			//	圆圈	
+		function circle(x, y, sR) {
+			ctx.save();
+			ctx.beginPath();
+			ctx.arc(l(x), l(y), sR, 0, Math.PI * 2);
+			ctx.fill();
+			ctx.closePath();
+			ctx.restore();
+		     }
+		circle(7, 7, sR);
+		circle(3, 3, sR);
+		circle(3, 11, sR);
+		circle(11, 3, sR);
+		circle(11, 11, sR);
+		//落子
+		function luozi(x, y, r, color) {
+				delete kong[l(x, y)]
+				ctx.save();
+				ctx.translate(l(x), l(y))
+				ctx.beginPath();
+				var g = ctx.createRadialGradient(-8, -6, 0, 0, 0, 100);
+				if (color === "black") {
+					g.addColorStop(0, '#fff');
+					g.addColorStop(0.2, '#000');
+					g.addColorStop(1, '#000');
+					ctx.fillStyle = g;
+				} else {
+					g.addColorStop(0, '#fff');
+					g.addColorStop(0.2, '#eee');
+					g.addColorStop(1, '#eee');
+					ctx.fillStyle = g;
+				}
+				ctx.arc(0, 0, r, 0, Math.PI * 2);
+				ctx.shadowOffsetX = 2;
+				ctx.shadowOffsetY = 2;
+				ctx.shadowBlur = 2;
+				ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+				ctx.fill();
+				ctx.closePath();
+				qz[x + '_' + y] = color;
+				ctx.restore();
+			}
+			//时间      
+			//			单机 站
+/////...............................................................
+		function inte() { //人机
+			var pos = {};
+			var pos2 = {};
+			var max = 0;
+			var max2 = 0;
+			for (var w in kong) {
+				if (kong[w]) {
+					var x = parseInt(w.split("_")[0]);
+					var y = parseInt(w.split("_")[1]);
+					if (panduan(x, y, r, "black") > max) {
+						max = panduan(x, y, r, "black")
+						pos = {
+							x: x,
+							y: y
+						}
+					}
+					if (panduan(x, y, r, "white") > max2) {
+						max2 = panduan(x, y, r, "white")
+						pos2 = {
+							x: x,
+							y: y
+						}
+					}
+				}
+			}
+			//	return pos2
+			if (max2 >= max) {
+				return pos2;
+			} else {
+				return pos;
+			}
+		}
+		inte()
+		ai.on('click', function() {
+			if (gameStatu === 'play') {
+				return;
+			}
+			$(this).addClass('red');
+			$(canvas).on('click', function(e) {
+					var x = Math.floor(e.offsetX / sep);
+					var y = Math.floor(e.offsetY / sep);
+					luozi(x, y, "black")
+					if (luozi(x, y, "black") > 5) {
+						$(".info").show();
+						$(".info").find("#text").html("黑棋");
+						$(canvas).off("click");
+					} else {
+						var x2 = inte().x
+						var y2 = inte().y
+						luozi(x2, y2, "white")
+						if (luozi(x2, y2, "white") > 5) {
+							$(".info").show();
+							$(".info").find("#text").html("白棋");
+							$(canvas).off("click");
+						}
+					}
+				})
+				//			console.log(x2,y2,ai().x,ai().y)
+			return false;
+		})
+///..............................................................
+		function p() {
+			ctx1.save();
+			ctx1.translate(7.5 * 10, 7.5 * 10)
+			for (var i = 0; i < 60; i++) {
+				ctx1.beginPath();
+				ctx1.strokeStyle = "white"
+				if (i % 15) {
+					ctx1.moveTo(0, -70);
+				} else {
+					ctx1.moveTo(0, -60);
+				}
+				ctx1.lineTo(0, -70);
+				ctx1.rotate(Math.PI / 180 * 6);
+				ctx1.closePath();
+				ctx1.stroke();
+			}
+			ctx1.restore();
+		}
+		p()
+
+		function p2() {
+			ctx2.save();
+			ctx2.translate(7.5 * 10, 7.5 * 10)
+			for (var i = 0; i < 60; i++) {
+				ctx2.beginPath();
+				ctx2.strokeStyle = "black"
+				if (i % 15) {
+					ctx2.moveTo(0, -70);
+				} else {
+					ctx2.moveTo(0, -60);
+				}
+				ctx2.lineTo(0, -70);
+				ctx2.rotate(Math.PI / 180 * 6);
+				ctx2.closePath();
+				ctx2.stroke();
+			}
+			ctx2.restore();
+		}
+		p2()
+		var u = 0;
+
+		function zhen1() {
+			canvas1.width = 150;
+			canvas1.height = 150;
+			p();
+			ctx1.clearRect(0, 0, 75, 75)
+			ctx1.save()
+			ctx1.beginPath()
+			ctx1.arc(75, 75, 5, 0, Math.PI * 2)
+			ctx1.closePath()
+			ctx1.fillStyle = "white";
+			ctx1.fill();
+			ctx1.restore()
+			ctx1.save();
+			ctx1.translate(7.5 * 10, 7.5 * 10)
+			ctx1.rotate(Math.PI / 180 * 6 * u)
+			ctx1.beginPath();
+			ctx1.moveTo(0, 5);
+			ctx1.lineTo(0, 30);
+			ctx1.moveTo(0, -5);
+			ctx1.lineTo(0, -50);
+			ctx1.closePath();
+			ctx1.strokeStyle = "white"
+			ctx1.stroke();
+			ctx1.restore()
+			u = u + 1;
+			if (u >= 360) {
+				u = 0
+			}
+		}
+		zhen1()
+		var m = 0;
+
+		function zhen2() {
+			canvas2.width = 150;
+			canvas2.height = 150;
+			p2()
+			ctx2.save()
+			ctx2.beginPath()
+			ctx2.arc(75, 75, 5, 0, Math.PI * 2)
+			ctx2.closePath()
+			ctx2.fill();
+			ctx2.restore()
+			ctx2.save();
+			ctx2.translate(7.5 * 10, 7.5 * 10)
+			ctx2.rotate(Math.PI / 180 * 6 * m)
+			ctx2.beginPath();
+			ctx2.moveTo(0, 5);
+			ctx2.lineTo(0, 30);
+			ctx2.moveTo(0, -5);
+			ctx2.lineTo(0, -50);
+			ctx2.closePath();
+			ctx2.strokeStyle = "black"
+			ctx2.stroke();
+			ctx2.restore()
+			m = m + 1;
+			if (m >= 360) {
+				m = 0
+			}
+		}
+		zhen2()
+		var t1 = setInterval(zhen1, 1000)
+		var t2;
+		//		判断输赢	
+		function lj(a, b) {
+			return a + "_" + b;
+		};
+
+		function panduan(x, y, color) {
+				var row = 1;
+				var i;
+				i = 1;
+				while (qz[lj(x + i, y)] === color) {
+					i++;
+					row++;
+				}
+				i = 1;
+				while (qz[lj(x - i, y)] === color) {
+					i++;
+					row++;
+				}
+				var lie = 1;
+				i = 1;
+				while (qz[lj(x, y - i)] === color) {
+					i++;
+					lie++;
+				}
+				i = 1;
+				while (qz[lj(x, y + i)] === color) {
+					i++;
+					lie++;
+				}
+				var zX = 1;
+				i = 1;
+				while (qz[lj(x + i, y + i)] === color) {
+					i++;
+					zX++;
+				}
+				i = 1;
+				while (qz[lj(x - i, y - i)] === color) {
+					i++;
+					zX++;
+				}
+				var yX = 1;
+				i = 1;
+				while (qz[lj(x - i, y + i)] === color) {
+					i++;
+					yX++;
+				}
+				i = 1;
+				while (qz[lj(x + i, y - i)] === color) {
+					i++;
+					yX++;
+				}
+				return Math.max(row, lie, zX, yX)
+			}
+			//出现棋谱
+		function qipu() {
+			var i = 1;
+			ctx.save();
+			ctx.font = "20px 微软雅黑";
+			ctx.textBaseline = "middle";
+			ctx.textAlign = "center";
+			for (var k in qz) {
+				if (qz[k] == 'white') {
+					ctx.fillStyle = "black"
+				} else {
+					ctx.fillStyle = "white"
+				}
+				var arr = k.split("_");
+				ctx.fillText(i++, l(parseInt(arr[0])), l(parseInt(arr[1])))
+			}
+			ctx.restore()
+			$("<img>").attr("src", canvas.toDataURL()).appendTo("#qi1")
+			$("<a>").attr("href", canvas.toDataURL()).attr("download", "1.png").appendTo("#qi1")
+		}
+
+	
+			//    点击
+
+		function victory(e) {
+				var x = Math.floor(e.offsetX / sep);
+				var y = Math.floor(e.offsetY / sep);
+				//   	  luozi(x,y,r,'black');
+				if (qz[x + '_' + y]) {
+					return
+				}
+				if (kaiguan) {
+					luozi(x, y, r, 'black');
+					if (panduan(x, y, 'black') >= 5) {
+						$(canvas).off('click');
+						$(".info").find("#text").html("黑棋赢").end();
+						$(".info").addClass("active");
+					};
+					qipu();
+					audio.play();
+					m = 0;
+					u = 0;
+					zhen1()
+					clearInterval(t1)
+					t2 = setInterval(zhen2, 1000);
+				} else {
+					luozi(x, y, r, 'white');
+					if (panduan(x, y, 'white') >= 5) {
+						$(canvas).off('click')
+						$(".info").find("#text").html("白棋赢").end();
+						$(".info").addClass("active");
+					}
+					qipu();
+					audio1.play();
+					u = 0;
+					m = 0;
+					zhen2()
+					clearInterval(t2)
+					t1 = setInterval(zhen1, 1000)
+				}
+				kaiguan = !kaiguan;
+			}
+			//		  再来一局	
+		$(canvas).on("click", victory) //画布点击
+		  var check=$("#check");
+		  var qi1=$("#qi1");
+		check.on("click",function() {
+		    
+			//查看棋盘
+//				qipan();
+			qi1.addClass("ac");
+			
+		})
+		$("#close").on("click", function() {//关闭棋谱			
+			$("#qi1").removeClass("ac");
+			//			qipan();
+			for (var k in qz) {
+				var x = parseInt(k.split("_")[0])
+				var y = parseInt(k.split("_")[1])
+				if (flag) {
+					luozi(x, y, "black");
+				} else {
+					luozi(x, y, "white");
+				}
+				kaiguan = !kaiguan;
+			}
+			return false;
+		})
+//		再来一局
+	function restart() {
+				$(".info").removeClass("active")
+				flag = true;
+				qipan();
+				qz = {};
+				$(canvas).on("click", victory)
+				return false;
+			}
+	$(".again").on("click", restart)
+	})
+</script>
